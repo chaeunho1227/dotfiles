@@ -1,0 +1,23 @@
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[user]
+    name = chaeunho1227
+    email = 97829504+chaeunho1227@users.noreply.github.com
+[core]
+  commentchar = "#"
+  editor = code --wait
+  ignorecase = false
+  autocrlf = input
+[init]
+  defaultBranch = main
+
+[alias]
+  # 손가락 피로도를 줄여줄 핵심 단축키
+  st = status
+  co = checkout
+  br = branch
+  ci = commit
+  lg = log --oneline --graph --all
