@@ -8,7 +8,7 @@
     email = 97829504+chaeunho1227@users.noreply.github.com
 [core]
   commentchar = "#"
-  editor = code --wait
+  editor = nvim
   ignorecase = false
   autocrlf = input
 [init]

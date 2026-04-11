@@ -14,36 +14,39 @@ else
 fi
 
 # ================================
-# mac
+# dotfiles 경로 자동 감지
+# ================================
+DOT="$(cd "$(dirname "$0")" && pwd)"
+
+# ================================
+# Homebrew 설치
 # ================================
 if [[ "$PLATFORM" == "mac" ]]; then
   if ! command -v brew >/dev/null; then
-    echo "===> install brew"
+    echo "===> install Homebrew"
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   fi
-
   eval "$(/opt/homebrew/bin/brew shellenv)"
-  brew install git tmux zsh fzf neovim zplug
-fi
 
-# ================================
-# ubuntu
-# ================================
-if [[ "$PLATFORM" == "linux" ]]; then
+elif [[ "$PLATFORM" == "linux" ]]; then
   sudo apt update
-  sudo apt install -y git tmux zsh fzf neovim curl build-essential
+  sudo apt install -y build-essential procps curl file git
 
-  # zplug
-  if [[ ! -d "$HOME/.zplug" ]]; then
-    git clone https://github.com/zplug/zplug ~/.zplug
+  if ! command -v brew >/dev/null; then
+    echo "===> install Linuxbrew"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   fi
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
+
+# ================================
+# 공통 패키지 (brew)
+# ================================
+brew install git tmux zsh fzf neovim zplug
 
 # ================================
 # symlink
 # ================================
-DOT="$HOME/dotfiles"
-
 ln -sf "$DOT/zsh/.zshrc" "$HOME/.zshrc"
 ln -sf "$DOT/git/.gitconfig" "$HOME/.gitconfig"
 ln -sf "$DOT/tmux/.tmux.conf" "$HOME/.tmux.conf"
@@ -52,11 +55,19 @@ mkdir -p "$HOME/.config/nvim"
 ln -sf "$DOT/nvim/init.lua" "$HOME/.config/nvim/init.lua"
 
 # ================================
-# zsh default
+# TPM (tmux plugin manager)
+# ================================
+if [[ ! -d "$HOME/.tmux/plugins/tpm" ]]; then
+  echo "===> install TPM"
+  git clone https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
+fi
+
+# ================================
+# zsh default shell
 # ================================
 if [[ "$SHELL" != *"zsh" ]]; then
   chsh -s "$(which zsh)"
 fi
 
-echo "✅ done"
+echo "done"
 echo "restart terminal"

@@ -45,7 +45,9 @@ export PATH="$HOME/.local/bin:$PATH"
 # ================================
 # Aliases
 # ================================
-alias work="cd ~/Documents/Workspace"
+if [[ -d "$HOME/Documents/Workspace" ]]; then
+  alias work="cd ~/Documents/Workspace"
+fi
 
 # Obsidian (mac only)
 if [[ "$OS_TYPE" == "mac" && -n "$OBSIDIAN_DIR" ]]; then
