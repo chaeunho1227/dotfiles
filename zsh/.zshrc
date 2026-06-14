@@ -117,6 +117,21 @@ fi
 
 
 # ================================
+# Key bindings (Mac 스타일 줄/단어 편집)
+# ================================
+bindkey '^[[1;3D' backward-word        # Option/Alt + ←  단어 왼쪽
+bindkey '^[[1;3C' forward-word         # Option/Alt + →  단어 오른쪽
+bindkey '^[[1;5D' backward-word        # Ctrl + ← (보조)
+bindkey '^[[1;5C' forward-word         # Ctrl + →
+bindkey '^[[H'  beginning-of-line      # Home / (kitty) Cmd + ←
+bindkey '^[[F'  end-of-line            # End  / (kitty) Cmd + →
+bindkey '^[OH'  beginning-of-line
+bindkey '^[OF'  end-of-line
+bindkey '^W'    backward-kill-word     # 단어 삭제 (Option/Cmd+Backspace가 매핑)
+bindkey '^U'    backward-kill-line     # 줄 처음까지 삭제 (Cmd+Backspace)
+
+
+# ================================
 # Powerlevel10k config
 # ================================
 [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
