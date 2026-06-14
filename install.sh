@@ -19,7 +19,7 @@ fi
 DOT="$(cd "$(dirname "$0")" && pwd)"
 
 # ================================
-# Homebrew 설치
+# 패키지 설치 (mac = brew / linux = apt)
 # ================================
 if [[ "$PLATFORM" == "mac" ]]; then
   if ! command -v brew >/dev/null; then
@@ -27,22 +27,14 @@ if [[ "$PLATFORM" == "mac" ]]; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   fi
   eval "$(/opt/homebrew/bin/brew shellenv)"
+  brew install git tmux zsh fzf neovim zplug ripgrep
 
 elif [[ "$PLATFORM" == "linux" ]]; then
   sudo apt update
-  sudo apt install -y build-essential procps curl file git
-
-  if ! command -v brew >/dev/null; then
-    echo "===> install Linuxbrew"
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  fi
-  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+  sudo apt install -y git tmux zsh fzf neovim ripgrep curl build-essential xclip
+  # zplug (apt에 없음 → git clone)
+  [[ -d "$HOME/.zplug" ]] || git clone https://github.com/zplug/zplug "$HOME/.zplug"
 fi
-
-# ================================
-# 공통 패키지 (brew)
-# ================================
-brew install git tmux zsh fzf neovim zplug ripgrep
 
 # ================================
 # symlink
