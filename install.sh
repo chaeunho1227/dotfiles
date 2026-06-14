@@ -47,6 +47,9 @@ ln -sf "$DOT/tmux/.tmux.conf" "$HOME/.tmux.conf"
 mkdir -p "$HOME/.config/nvim"
 ln -sf "$DOT/nvim/init.lua" "$HOME/.config/nvim/init.lua"
 
+mkdir -p "$HOME/.config/kitty"
+ln -sf "$DOT/kitty/kitty.conf" "$HOME/.config/kitty/kitty.conf"
+
 # ================================
 # TPM (tmux plugin manager)
 # ================================
