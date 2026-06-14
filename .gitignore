@@ -1,3 +1,4 @@
 .env
 .zshrc.local
 private/
+.DS_Store

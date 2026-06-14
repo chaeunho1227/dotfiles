@@ -15,6 +15,15 @@ esac
 
 
 # ================================
+# History
+# ================================
+HISTFILE="$HOME/.zsh_history"
+HISTSIZE=100000
+SAVEHIST=100000
+setopt SHARE_HISTORY HIST_IGNORE_ALL_DUPS HIST_IGNORE_SPACE HIST_REDUCE_BLANKS INC_APPEND_HISTORY EXTENDED_HISTORY
+
+
+# ================================
 # Instant prompt (Powerlevel10k)
 # ================================
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
@@ -88,6 +97,12 @@ fi
 
 
 # ================================
+# Completion (플러그인 fpath 반영 후 초기화)
+# ================================
+autoload -Uz compinit && compinit -C
+
+
+# ================================
 # fzf
 # ================================
 if command -v fzf >/dev/null 2>&1; then
@@ -118,3 +133,13 @@ claude() {
   done
   command claude "${args[@]}"
 }
+
+
+# ================================
+# pyenv (설치돼 있을 때만 — pyenv 없는 머신에서 에러 방지)
+# ================================
+if [[ -d "$HOME/.pyenv" ]]; then
+  export PYENV_ROOT="$HOME/.pyenv"
+  export PATH="$PYENV_ROOT/bin:$PATH"
+  command -v pyenv >/dev/null 2>&1 && eval "$(pyenv init -)"
+fi

@@ -42,7 +42,7 @@ fi
 # ================================
 # 공통 패키지 (brew)
 # ================================
-brew install git tmux zsh fzf neovim zplug
+brew install git tmux zsh fzf neovim zplug ripgrep
 
 # ================================
 # symlink
