@@ -40,6 +40,7 @@ fi
 # symlink
 # ================================
 ln -sf "$DOT/zsh/.zshrc" "$HOME/.zshrc"
+ln -sf "$DOT/zsh/.p10k.zsh" "$HOME/.p10k.zsh"
 ln -sf "$DOT/git/.gitconfig" "$HOME/.gitconfig"
 ln -sf "$DOT/tmux/.tmux.conf" "$HOME/.tmux.conf"
 
