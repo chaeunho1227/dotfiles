@@ -63,6 +63,12 @@ if [[ "$OS_TYPE" == "mac" && -n "$OBSIDIAN_DIR" ]]; then
   alias obsi="cd $OBSIDIAN_DIR"
 fi
 
+# Tailscale (mac: 앱 번들 경로 / linux: 시스템 CLI)
+if [[ "$OS_TYPE" == "mac" ]]; then
+  alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
+fi
+alias tdget='tailscale file get ~/Downloads/'   # Taildrop 받은 파일 수령 (맥/우분투 공통)
+
 
 # ================================
 # Zplug (Plugin Manager)
