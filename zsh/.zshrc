@@ -69,6 +69,18 @@ if [[ "$OS_TYPE" == "mac" ]]; then
 fi
 alias tdget='tailscale file get ~/Downloads/'   # Taildrop 받은 파일 수령 (맥/우분투 공통)
 
+# OS 전환: 다음 1회만 윈도우로 부팅 + 재부팅 (linux 전용)
+if [[ "$OS_TYPE" == "linux" ]]; then
+  windows() {
+    local entry
+    entry=$(sudo awk -F"'" '/menuentry .*[Ww]indows/{print $2; exit}' /boot/grub/grub.cfg)
+    [[ -z "$entry" ]] && { echo "Windows GRUB 엔트리를 못 찾음"; return 1; }
+    read "ans?다음 부팅을 '$entry' 로 하고 재부팅할까요? [y/N] "
+    [[ "$ans" == [yY] ]] || { echo "취소됨"; return 1; }
+    sudo grub-reboot "$entry" && sudo reboot
+  }
+fi
+
 
 # ================================
 # Zplug (Plugin Manager)
